@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
 
-return new class extends Migration
+class CreateSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
             $table->timestamp('created_at')->default(Carbon::now());
-            $table->foreignId('player_id')->constrained('user');
-            $table->foreignId('game_id')->constrained('game');
+            $table->foreignId('player_id')->constrained('users');
+            $table->foreignId('game_id')->constrained('games');
             $table->integer('score')->default(0);
         });
     }
@@ -28,4 +28,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('sessions');
     }
-};
+}
