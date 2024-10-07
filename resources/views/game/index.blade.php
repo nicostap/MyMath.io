@@ -1,7 +1,15 @@
 @extends('base.base')
 
 @section('content')
+<div id="matchmaking">
+    <div id="status">Looking for a match...</div>
+</div>
+<div id="game">
 
+</div>
+<div id="finish">
+
+</div>
 @endsection
 
 @section('scripts')
@@ -14,7 +22,9 @@
             .then(response => {
                 if (response.data) {
                     gameId = response.data.id;
-                    document.getElementById('status').innerText = "Match found! Waiting to start...";
+                    $('#status').text("Match found! Waiting to start...");
+                    $('#matchmaking').fadeToggle();
+                    $('#game').toggle();
                     startGame();
                 } else {
                     setTimeout(connect, 1000);
@@ -30,10 +40,9 @@
         axios.post(`/game/${gameId}/start`, { user_id: userId })
             .then(response => {
                 if (response.data.status === 'started') {
-                    document.getElementById('status').innerText = "Game Started!";
-                    // Here, you can redirect the player to the game page or start the game logic
+                    $('#status').text("Game Started!");
                 } else if (response.data.status === 'aborted') {
-                    document.getElementById('status').innerText = "Match aborted. Looking for a new match...";
+                    $('#status').text("Match aborted. Looking for a new match...");
                     gameId = null;
                     setTimeout(connect, 1000);
                 } else {
@@ -45,6 +54,11 @@
                 setTimeout(startGame, 1000);
             });
     }
-    connect();
+
+    $(document).ready(function () {
+        $('#game').hide();
+        $('#finish').hide();
+        connect();
+    });
 </script>
 @endsection

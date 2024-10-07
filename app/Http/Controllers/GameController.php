@@ -8,9 +8,16 @@ use App\Models\Session;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class GameController extends Controller
 {
+    public function index()
+    {
+        $user = Auth::user();
+        return view('game.index', ['user' => $user]);
+    }
+
     public function connect(User $user)
     {
         $gameHosted = Game::join('users', 'games.first_player_id', '=', 'users.id')
