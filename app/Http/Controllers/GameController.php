@@ -18,7 +18,6 @@ class GameController extends Controller
             ->first();
         $game = Game::join('users', 'games.first_player_id', '=', 'users.id')
             ->where('second_player_id', null)
-            ->where('started_at', null)
             ->where('created_at', '>=', Carbon::now()->subSeconds(3))
             ->orderBy(DB::raw('users.rating - ' . $user->rating))
             ->first();
@@ -57,9 +56,9 @@ class GameController extends Controller
                 : $sessions[1])
             : Session::create(['game_id' => $game->id, 'player_id' => $user->id]);
         if (count($sessions) > 1 || (count($sessions) === 1 && !$isSessionCreated)) {
-            $game->update([
+            $session->update([
                 'started_at' => Carbon::now(),
-                'finished_at' => Carbon::now()->addMinute(),
+                'finished_at' => Carbon::now()->addMinute()->addSeconds(3),
             ]);
             $response = [
                 'session' => $session,

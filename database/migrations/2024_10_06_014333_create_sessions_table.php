@@ -18,6 +18,8 @@ class CreateSessionsTable extends Migration
             $table->foreignId('player_id')->constrained('users');
             $table->foreignId('game_id')->constrained('games')->onDelete('cascade');
             $table->integer('score')->default(0);
+            $table->timestamp('started_at')->nullable()->default(null);
+            $table->timestamp('finished_at')->nullable()->default(null);
         });
     }
 

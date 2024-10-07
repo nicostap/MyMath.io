@@ -16,8 +16,6 @@ class CreateGamesTable extends Migration {
             $table->timestamp('created_at')->default(Carbon::now());
             $table->foreignId('first_player_id')->constrained('users');
             $table->timestamp('matched_at')->nullable()->default(null);
-            $table->timestamp('started_at')->nullable()->default(null);
-            $table->timestamp('finished_at')->nullable()->default(null);
             $table->integer('avg_rating')->nullable()->default(null);
             $table->foreignId('second_player_id')->nullable()->default(null)->constrained('users');
         });
