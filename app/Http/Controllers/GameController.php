@@ -19,19 +19,23 @@ class GameController extends Controller
         $game = Game::join('users', 'games.first_player_id', '=', 'users.id')
             ->where('second_player_id', null)
             ->where('created_at', '>=', Carbon::now()->subSeconds(3))
-            ->orderBy(DB::raw('users.rating - ' . $user->rating))
+            ->orderByRaw('ABS(users.rating - ?)', [$user->rating])
+            ->lockForUpdate()
             ->first();
         if ($gameHosted && $gameHosted->second_player_id) {
             return response()->json($gameHosted);
         } else if ($game) {
-            if ($gameHosted) {
-                $gameHosted->delete();
-            }
-            $game->update([
-                'second_player_id' => $user->id,
-                'matched_at' => Carbon::now(),
-                'avg_rating' => ($user->rating + $game->firstPlayer->rating) / 2
-            ]);
+            DB::transaction(function () use ($game, $user, $gameHosted) {
+                if ($gameHosted) {
+                    $gameHosted->delete();
+                }
+
+                $game->update([
+                    'second_player_id' => $user->id,
+                    'matched_at' => Carbon::now(),
+                    'avg_rating' => ($user->rating + $game->firstPlayer->rating) / 2
+                ]);
+            });
             return response()->json($game);
         } else if (is_null($gameHosted)) {
             Game::insert([
