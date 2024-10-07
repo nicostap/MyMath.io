@@ -32,7 +32,7 @@ class SessionQuestionController extends Controller
             'math_question' => $math_question,
             'image' => $image,
         ];
-        response()->json($response);
+        return response()->json($response);
     }
 
     public function answer(SessionQuestion $sessionQuestion, float $answer)
@@ -41,7 +41,7 @@ class SessionQuestionController extends Controller
         $session = $sessionQuestion->session;
         $question = $sessionQuestion->question;
 
-        if (Carbon::now()->greaterThanOrEqualTo($game->finishedAt)) {
+        if (Carbon::now()->greaterThanOrEqualTo($session->finished_at)) {
             return;
         }
 

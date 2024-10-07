@@ -15,8 +15,6 @@ class Game extends Model
         'first_player_id',
         'second_player_id',
         'matched_at',
-        'started_at',
-        'finished_at',
         'avg_rating',
     ];
 
@@ -27,8 +25,6 @@ class Game extends Model
     protected $dates = [
         'created_at',
         'matched_at',
-        'started_at',
-        'finished_at',
     ];
 
     public function firstPlayer()

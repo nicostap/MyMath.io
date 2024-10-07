@@ -14,6 +14,8 @@ class Session extends Model
         'player_id',
         'game_id',
         'score',
+        'started_at',
+        'finished_at',
     ];
 
     protected $casts = [
@@ -22,6 +24,8 @@ class Session extends Model
 
     protected $dates = [
         'created_at',
+        'started_at',
+        'finished_at',
     ];
 
     public function player()

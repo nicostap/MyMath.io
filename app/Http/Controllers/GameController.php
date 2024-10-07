@@ -77,6 +77,6 @@ class GameController extends Controller
                 ];
             }
         }
-        response()->json($response);
+        return response()->json($response);
     }
 }

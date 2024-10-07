@@ -24,12 +24,12 @@ class SessionController extends Controller
         } else {
             $winner = null;
         }
-        if (Carbon::now()->greaterThanOrEqualTo($game->finishedAt)) {
+        if (Carbon::now()->greaterThanOrEqualTo($session->finished_at)) {
             $status = 'Finished';
-            HistoryGame::insert([
+            HistoryGame::insertOrIgnore([
                 'id' => $game->id,
-                'started_at' => $game->started_at,
-                'finished_at' => $game->finished_at,
+                'started_at' => $session->started_at,
+                'finished_at' => $session->finished_at,
                 'first_player_id' => $game->first_player_id,
                 'second_player_id' => $game->second_player_id,
                 'winner_id' => is_null($winner) ? null : $winner->id,
@@ -45,6 +45,6 @@ class SessionController extends Controller
             'status' => $status,
             'winner' => $winner,
         ];
-        response()->json($response);
+        return response()->json($response);
     }
 }
