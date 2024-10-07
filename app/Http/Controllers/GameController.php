@@ -19,6 +19,7 @@ class GameController extends Controller
         $game = Game::join('users', 'games.first_player_id', '=', 'users.id')
             ->where('second_player_id', null)
             ->where('started_at', null)
+            ->where('created_at', '>=', Carbon::now()->subSeconds(3))
             ->orderBy(DB::raw('users.rating - ' . $user->rating))
             ->first();
         if ($gameHosted && $gameHosted->second_player_id) {
@@ -38,6 +39,10 @@ class GameController extends Controller
                 'first_player_id' => $user->id
             ]);
             return response()->noContent();
+        } else {
+            $gameHosted->update([
+                'created_at' => Carbon::now()
+            ]);
         }
         return response()->noContent();
     }
@@ -61,10 +66,17 @@ class GameController extends Controller
                 'status' => 'started'
             ];
         } else {
-            $response = [
-                'session' => $session,
-                'status' => 'waiting'
-            ];
+            if ($game->matched_at->lt(Carbon::now()->subSeconds(5))) {
+                $game->delete();
+                $response = [
+                    'status' => 'aborted'
+                ];
+            } else {
+                $response = [
+                    'session' => $session,
+                    'status' => 'waiting'
+                ];
+            }
         }
         response()->json($response);
     }

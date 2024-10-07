@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('session_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('session_id')->constrained('sessions');
+            $table->foreignId('session_id')->constrained('sessions')->onDelete('cascade');
             $table->foreignId('question_id')->constrained('questions');
             $table->json('coefficients');
         });

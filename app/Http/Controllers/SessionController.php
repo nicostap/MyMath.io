@@ -22,7 +22,7 @@ class SessionController extends Controller
         } elseif ($first_player_score < $second_player_score) {
             $winner = $game->secondPlayer;
         } else {
-            $winner_id = null;
+            $winner = null;
         }
         if (Carbon::now()->greaterThanOrEqualTo($game->finishedAt)) {
             $status = 'Finished';
@@ -32,7 +32,7 @@ class SessionController extends Controller
                 'finished_at' => $game->finished_at,
                 'first_player_id' => $game->first_player_id,
                 'second_player_id' => $game->second_player_id,
-                'winner_id' => $winner->id,
+                'winner_id' => is_null($winner) ? null : $winner->id,
                 'first_player_score' => $first_player_score,
                 'second_player_score' => $second_player_score,
             ]);

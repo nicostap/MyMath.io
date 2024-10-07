@@ -16,7 +16,7 @@ class CreateSessionsTable extends Migration
             $table->id();
             $table->timestamp('created_at')->default(Carbon::now());
             $table->foreignId('player_id')->constrained('users');
-            $table->foreignId('game_id')->constrained('games');
+            $table->foreignId('game_id')->constrained('games')->onDelete('cascade');
             $table->integer('score')->default(0);
         });
     }
