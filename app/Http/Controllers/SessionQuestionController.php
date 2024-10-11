@@ -13,26 +13,53 @@ class SessionQuestionController extends Controller
 {
     public function getQuestion(Session $session)
     {
-        $question = Question::inRandomOrder()->first();
-        $text_question = $question->question;
-        $math_question = $question->math_question;
-        $image = isset($question->image) ? asset($question->image) : null;
-        $coefficients = explode(',', $question->coefficients);
-        $coefficientsInput = [];
+        $activeQuestion = SessionQuestion::where('session_id', $session->id)->where('active', 1)->first();
+        if (isset($activeQuestion)) {
+            $selected_question = $activeQuestion->question;
+        } else {
+            $avg_rating = $session->game->avg_rating;
+            $questions = Question::all()->map(function ($question) use ($avg_rating) {
+                $question->weight = 1 / (abs($question->rating - $avg_rating) + 1);
+                return $question;
+            });
+
+            $total_weight = $questions->sum('weight');
+            $random = mt_rand(0, $total_weight * 10000) / 10000;
+            $current_sum = 0;
+            $selected_question = null;
+
+            foreach ($questions as $question) {
+                $current_sum += $question->weight;
+                if ($random <= $current_sum) {
+                    $selected_question = $question;
+                    break;
+                }
+            }
+        }
+
+        $text_question = $selected_question->question;
+        $math_question = $selected_question->math_question;
+        $image = isset($selected_question->image) ? asset($selected_question->image) : null;
+        $coefficients = explode(',', $selected_question->coefficients);
+        $coefficientsInput = isset($activeQuestion) ? $activeQuestion->coefficients : [];
         foreach ($coefficients as $coefficient) {
-            $coefficientsInput[$coefficient] = round(2 + mt_rand() / mt_getrandmax() * 18, $question->round_to);
+            if (!isset($activeQuestion)) {
+                $coefficientsInput[$coefficient] = round(2 + mt_rand() / mt_getrandmax() * 18, $selected_question->round_to);
+            }
             $math_question = str_replace($coefficient, $coefficientsInput[$coefficient], $math_question);
         }
-        $sessionQuestion = SessionQuestion::create([
-            'session_id' => $session->id,
-            'question_id' => $question->id,
-            'coefficients' => $coefficientsInput,
-        ]);
+        if (!isset($activeQuestion)) {
+            $activeQuestion = SessionQuestion::create([
+                'session_id' => $session->id,
+                'question_id' => $selected_question->id,
+                'coefficients' => $coefficientsInput,
+            ]);
+        }
         $response = [
             'text_question' => $text_question,
             'math_question' => $math_question,
             'image' => $image,
-            'session_question' => $sessionQuestion,
+            'session_question' => $activeQuestion,
         ];
         return response()->json($response);
     }
@@ -44,7 +71,9 @@ class SessionQuestionController extends Controller
         $question = $sessionQuestion->question;
         $answer = $request->input('answer');
 
-        if (Carbon::now()->greaterThanOrEqualTo(Carbon::parse($session->finished_at))) {
+        $sessionQuestion->update(['active' => 0]);
+
+        if (Carbon::now()->greaterThanOrEqualTo(Carbon::parse($session->finished_at)) || $session->active == 0) {
             return;
         }
 

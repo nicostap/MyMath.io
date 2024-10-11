@@ -13,23 +13,42 @@ class SessionController extends Controller
     public function getGameStatus(Game $game, Session $session)
     {
         $sessions = $game->sessions;
-        $second_player_session = $sessions[0]->id === $session->id ? $sessions[1] : $sessions[0];
-        $first_player_score = $session->score;
+        foreach ($sessions as $session) {
+            if ($session->player_id == $game->first_player_id) {
+                $first_player_session = $session;
+            } else if ($session->player_id == $game->second_player_id) {
+                $second_player_session = $session;
+            }
+        }
+        $first_player_score = $first_player_session->score;
         $second_player_score = $second_player_session->score;
 
         if ($first_player_score > $second_player_score) {
             $winner = $game->firstPlayer;
+            $loser = $game->secondPlayer;
         } elseif ($first_player_score < $second_player_score) {
             $winner = $game->secondPlayer;
+            $loser = $game->firstPlayer;
         } else {
             $winner = null;
         }
         if (Carbon::now()->greaterThanOrEqualTo(Carbon::parse($session->finished_at))) {
             $status = 'Finished';
-            $winner->update([
-                'rating' => $winner->rating + 10,
+            if (isset($winner)) {
+                $winner->update([
+                    'rating' => $winner->rating + 10,
+                ]);
+                $loser->update([
+                    'rating' => $loser->rating - 8,
+                ]);
+            }
+            $game->update([
+                'active' => 0,
             ]);
-            HistoryGame::insertOrIgnore([
+            $session->update([
+                'active' => 0,
+            ]);
+            HistoryGame::upsert([
                 'id' => $game->id,
                 'started_at' => $session->started_at,
                 'finished_at' => $session->finished_at,
@@ -38,7 +57,7 @@ class SessionController extends Controller
                 'winner_id' => is_null($winner) ? null : $winner->id,
                 'first_player_score' => $first_player_score,
                 'second_player_score' => $second_player_score,
-            ]);
+            ], ['id']);
         } else {
             $status = 'Ongoing';
         }

@@ -15,6 +15,7 @@ class SessionQuestion extends Model
         'session_id',
         'question_id',
         'coefficients',
+        'active',
     ];
 
     protected $casts = [

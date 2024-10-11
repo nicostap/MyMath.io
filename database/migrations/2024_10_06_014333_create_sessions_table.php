@@ -21,6 +21,7 @@ class CreateSessionsTable extends Migration
             $table->integer('score')->default(0);
             $table->timestamp('started_at')->nullable()->default(null);
             $table->timestamp('finished_at')->nullable()->default(null);
+            $table->boolean('active')->default(1);
         });
     }
 

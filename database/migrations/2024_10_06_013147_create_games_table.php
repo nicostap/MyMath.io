@@ -19,6 +19,7 @@ class CreateGamesTable extends Migration {
             $table->timestamp('matched_at')->nullable()->default(null);
             $table->integer('avg_rating')->nullable()->default(null);
             $table->foreignId('second_player_id')->nullable()->default(null)->constrained('users');
+            $table->boolean('active')->default(1);
         });
     }
 

@@ -4,7 +4,7 @@
 <div
     class="relative flex flex-col h-full w-full items-center justify-between gap-5 bg-gray-900 text-white overflow-hidden">
     <div class="absolute left-0 top-0 h-full w-full">
-        <img src="{{asset('math.jpg')}}" class="h-full w-full object-cover opacity-20" />
+        <img src="{{asset('math.jpg')}}" class="h-full w-full object-cover opacity-20 blur-sm" />
     </div>
 
     <div id="matchmaking" class="relative z-10 flex flex-col h-full w-full items-center justify-center gap-20">
@@ -40,7 +40,7 @@
 
         <!-- Timer -->
         <div class="flex flex-col items-center mt-10">
-            <p id="timer" class="text-center text-5xl font-bold mt-2">60</p>
+            <p id="timer" class="text-center text-5xl font-bold mt-2"></p>
         </div>
 
         <!-- Question Section -->
@@ -146,13 +146,18 @@
                     $('#game').fadeIn();
                     sessionId = response.data.session.id;
                     firstOrSecond = response.data.turn;
+
+                    const finishedTime = new Date(response.data.session.finished_at);
+                    const now = new Date();
+                    console.log(response.data.session.finished_at, now, finishedTime - now);
+                    timeLeft = Math.floor((finishedTime - now) / 1000);
+
                     fetchQuestion();
 
                     const countdown = setInterval(() => {
                         if (timeLeft <= 0) {
                             clearInterval(countdown);
                             timerElement.innerText = "0";
-                            alert("Time's up!");
                         } else {
                             timerElement.innerText = timeLeft;
                         }

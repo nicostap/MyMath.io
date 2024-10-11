@@ -16,6 +16,7 @@ class Session extends Model
         'score',
         'started_at',
         'finished_at',
+        'active',
     ];
 
     protected $casts = [

@@ -17,6 +17,7 @@ class Game extends Model
         'matched_at',
         'avg_rating',
         'updated_at',
+        'active',
     ];
 
     protected $casts = [
