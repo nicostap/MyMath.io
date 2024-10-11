@@ -31,11 +31,9 @@ Route::controller(GameController::class)->group(function () {
 Route::get('/game/{game}/session/{session}/status', [SessionController::class, 'getGameStatus'])
     ->name('game.session.status');
 
-
 Route::controller(SessionQuestionController::class)->group(function () {
     Route::get('/session/{session}/question', 'getQuestion')
         ->name('session.question.get');
-
     Route::post('/session-questions/{sessionQuestion}/answer', 'answer')
         ->name('session.question.answer');
 });

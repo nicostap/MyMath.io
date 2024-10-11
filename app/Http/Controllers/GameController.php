@@ -73,23 +73,25 @@ class GameController extends Controller
             $userSession = Session::create(['game_id' => $game->id, 'player_id' => $user->id]);
         }
         if ($count > 1 || $count == 1 && !$isSessionCreated) {
+            $firstOrSecond = $game->firstPlayer->id == $user->id ? 'first' : 'second';
             $userSession->update([
                 'started_at' => Carbon::now(),
                 'finished_at' => Carbon::now()->addMinute()->addSeconds(3),
             ]);
             $response = [
-                'session' => $session,
-                'status' => 'started'
+                'session' => $userSession,
+                'status' => 'started',
+                'turn' => $firstOrSecond,
             ];
         } else {
-            if ($game->matched_at->lt(Carbon::now()->subSeconds(5))) {
+            if (Carbon::parse($game->matched_at)->lt(Carbon::now()->subSeconds(5))) {
                 $game->delete();
                 $response = [
                     'status' => 'aborted'
                 ];
             } else {
                 $response = [
-                    'session' => $session,
+                    'session' => $userSession,
                     'status' => 'waiting'
                 ];
             }

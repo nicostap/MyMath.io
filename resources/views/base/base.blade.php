@@ -11,7 +11,9 @@
 </head>
 
 <body>
-    @yield('content')
+    <div id="app" class="h-screen flex flex-col items-center p-20">
+        @yield('content')
+    </div>
     @vite('resources/js/app.js')
     @yield('scripts')
 </body>
