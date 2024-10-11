@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div id="app" class="h-screen flex flex-col items-center p-20">
+    <div id="app" class="h-screen w-screen flex flex-col items-center">
         @yield('content')
     </div>
     @vite('resources/js/app.js')

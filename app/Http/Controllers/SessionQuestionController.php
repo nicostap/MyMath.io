@@ -44,9 +44,9 @@ class SessionQuestionController extends Controller
         $question = $sessionQuestion->question;
         $answer = $request->input('answer');
 
-        // if (Carbon::now()->greaterThanOrEqualTo(Carbon::parse($session->finished_at))) {
-        //     return;
-        // }
+        if (Carbon::now()->greaterThanOrEqualTo(Carbon::parse($session->finished_at))) {
+            return;
+        }
 
         $rating = $game->avg_rating;
         $formula = $question->answer_formula;

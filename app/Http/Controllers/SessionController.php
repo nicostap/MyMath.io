@@ -26,6 +26,9 @@ class SessionController extends Controller
         }
         if (Carbon::now()->greaterThanOrEqualTo(Carbon::parse($session->finished_at))) {
             $status = 'Finished';
+            $winner->update([
+                'rating' => $winner->rating + 10,
+            ]);
             HistoryGame::insertOrIgnore([
                 'id' => $game->id,
                 'started_at' => $session->started_at,
