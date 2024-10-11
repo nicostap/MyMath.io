@@ -28,6 +28,7 @@ class User extends Authenticatable
         'active' => 'boolean',
         'rating' => 'integer',
         'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function historyGames()

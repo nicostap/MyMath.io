@@ -19,7 +19,3 @@ use Carbon\Carbon;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
-
-Schedule::call(function () {
-    DB::table('games')->where('created_at', '<', Carbon::now()->subHour());
-})->daily();

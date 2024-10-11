@@ -22,7 +22,22 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::resource('game', GameController::class);
-Route::resource('session', SessionController::class);
-Route::resource('session_question', SessionQuestionController::class);
+Route::controller(GameController::class)->group(function () {
+    Route::get('/game/{user}', 'index')->name('game.index');
+    Route::post('/game/connect/{user}', 'connect')->name('game.connect');
+    Route::post('/game/{game}/start/{user}', 'start')->name('game.start');
+});
+
+Route::get('/game/{game}/session/{session}/status', [SessionController::class, 'getGameStatus'])
+    ->name('game.session.status');
+
+
+Route::controller(SessionQuestionController::class)->group(function () {
+    Route::get('/session/{session}/question', 'getQuestion')
+        ->name('session.question.get');
+
+    Route::post('/session-questions/{sessionQuestion}/answer', 'answer')
+        ->name('session.question.answer');
+});
+
 Route::resource('history_game', HistoryGameController::class);

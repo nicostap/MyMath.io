@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 
 class CreateQuestionsTable extends Migration
 {
@@ -21,6 +22,8 @@ class CreateQuestionsTable extends Migration
             $table->integer('round_to')->default(0);
             $table->integer('rating')->default(0);
             $table->enum('type', ['MULTIPLE_CHOICES', 'ESSAY']);
+            $table->timestamp('created_at')->default(Carbon::now());
+            $table->timestamp('updated_at')->default(Carbon::now());
         });
     }
 

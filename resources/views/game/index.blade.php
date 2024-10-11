@@ -1,8 +1,8 @@
 @extends('base.base')
 
 @section('content')
+<h1 id="status" class="font-bold text-center">Looking for a match...</h1>
 <div id="matchmaking">
-    <div id="status">Looking for a match...</div>
 </div>
 <div id="game">
 
@@ -18,7 +18,7 @@
     let gameId = null;
 
     function connect() {
-        axios.post('/game/connect', { user_id: userId })
+        axios.post(`/game/connect/{{$user->id}}`)
             .then(response => {
                 if (response.data) {
                     gameId = response.data.id;
@@ -37,7 +37,7 @@
     }
 
     function startGame() {
-        axios.post(`/game/${gameId}/start`, { user_id: userId })
+        axios.post(`/game/${gameId}/start/{{$user->id}}`)
             .then(response => {
                 if (response.data.status === 'started') {
                     $('#status').text("Game Started!");

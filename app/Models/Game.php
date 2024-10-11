@@ -16,6 +16,7 @@ class Game extends Model
         'second_player_id',
         'matched_at',
         'avg_rating',
+        'updated_at',
     ];
 
     protected $casts = [
@@ -24,6 +25,7 @@ class Game extends Model
 
     protected $dates = [
         'created_at',
+        'updated_at',
         'matched_at',
     ];
 

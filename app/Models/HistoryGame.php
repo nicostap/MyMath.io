@@ -28,6 +28,8 @@ class HistoryGame extends Model
         'finished_at' => 'datetime',
         'first_player_score' => 'integer',
         'second_player_score' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function firstPlayer()

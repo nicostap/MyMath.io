@@ -23,5 +23,7 @@ class Question extends Model
     protected $casts = [
         'round_to' => 'integer',
         'rating' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }
