@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\GameController;
-use App\Http\Controllers\HistoryGameController;
-use App\Http\Controllers\SessionController;
-use App\Http\Controllers\SessionQuestionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\HistoryGameController;
+use App\Http\Controllers\SessionQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,11 @@ Route::controller(SessionQuestionController::class)->group(function () {
         ->name('session.question.get');
     Route::post('/session-questions/{sessionQuestion}/answer', 'answer')
         ->name('session.question.answer');
+});
+
+Route::controller(UserController::class)->group(function () {
+    Route::get('/user/leaderboard/{user}', 'leaderboard')
+        ->name('user.leaderboard.get');
 });
 
 Route::resource('history_game', HistoryGameController::class);
