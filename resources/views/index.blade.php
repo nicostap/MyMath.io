@@ -1,6 +1,8 @@
 @extends('base.base')
 
 @section('content')
+    {{ Auth::id() }}
+
     <div class="flex flex-col h-full w-full items-center justify-between gap-5 bg-gray-900 text-white">
         <div class="w-full py-16 sm:px-6 sm:py-24 lg:px-8">
             <div
@@ -23,10 +25,10 @@
                     <p class="mt-6 text-lg leading-8 text-gray-300">See how strong your math is. Beat the others and become
                         the legend</p>
                     <div class="mt-10 flex items-center justify-start gap-x-6">
-                        <a href="#"
+                        <a href="{{ route('login') }}"
                             class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                             Login</a>
-                        <a href="#" class="text-sm font-semibold leading-6 text-white">Sign Up <span
+                        <a href="{{ route('register') }}" class="text-sm font-semibold leading-6 text-white">Sign Up <span
                                 aria-hidden="true">→</span></a>
                     </div>
                 </div>

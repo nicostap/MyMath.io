@@ -3,13 +3,53 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
-        //
+        return view('user.authentication.login');
+    }
+
+    public function authenticate(Request $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+        ]);
+
+        
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/');
+        }
+ 
+        return back()->with('loginError', 'Login Failed!');
+    }
+
+    public function registerView(){
+        return view('user.authentication.register');
+    }
+
+    public function register(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required',
+            'rating' => 'required'
+        ]);
+        
+        $validatedData['password'] = bcrypt($validatedData['password']);
+        
+
+        User::create($validatedData);
+
+        session()->flash('success', 'Registration successful! Please login');
+
+        return redirect('/login');
     }
 
     public function leaderboard(User $user)

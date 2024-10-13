@@ -23,6 +23,15 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::controller(UserController::class)->group(function () {
+    Route::get('/login', 'index')
+        ->name('login');
+    Route::post('/login', 'authenticate');
+    Route::get('/register', 'registerView')
+        ->name('register');
+    Route::post('/register', 'register');
+});
+
 Route::controller(GameController::class)->group(function () {
     Route::get('/game/{user}', 'index')->name('game.index');
     Route::post('/game/connect/{user}', 'connect')->name('game.connect');
