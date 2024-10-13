@@ -9,7 +9,7 @@
 
             <div class="my-3 relative overflow-x-auto shadow-md sm:rounded-md">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <caption class="text-xs text-gray-700 uppercase bg-gray-50 font-bold text-left px-6 py-1 text-lg">{{ $rank }}
+                    <caption class="text-gray-700 uppercase bg-gray-50 font-bold text-left px-6 py-1 text-lg">{{ $rank }}
                     </caption>
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
