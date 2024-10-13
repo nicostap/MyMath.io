@@ -24,12 +24,14 @@ Route::get('/', function () {
 });
 
 Route::controller(UserController::class)->group(function () {
-    Route::get('/login', 'index')
-        ->name('login');
+    Route::get('/login', 'index')->name('login');
     Route::post('/login', 'authenticate');
-    Route::get('/register', 'registerView')
-        ->name('register');
+
+    Route::get('/register', 'registerView')->name('register');
     Route::post('/register', 'register');
+
+    Route::get('/profile', 'profile')->name('profile');
+    Route::post('/profile', 'updateProfile')->name('update-profile');
 });
 
 Route::controller(GameController::class)->group(function () {

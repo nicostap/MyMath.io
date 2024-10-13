@@ -1,8 +1,6 @@
 @extends('base.base')
 
 @section('content')
-    {{ Auth::id() }}
-
     <div class="flex flex-col h-full w-full items-center justify-between gap-5 bg-gray-900 text-white">
         <div class="w-full py-16 sm:px-6 sm:py-24 lg:px-8">
             <div

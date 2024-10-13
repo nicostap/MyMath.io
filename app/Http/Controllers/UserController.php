@@ -17,16 +17,15 @@ class UserController extends Controller
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'name' => 'required',
+            'email' => 'required|email:dns',
             'password' => 'required',
         ]);
-
         
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
- 
+
         return back()->with('loginError', 'Login Failed!');
     }
 
@@ -50,6 +49,34 @@ class UserController extends Controller
         session()->flash('success', 'Registration successful! Please login');
 
         return redirect('/login');
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('user.profile', ['user' => $user]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+
+        $validatedData = $request->validate([
+            'email' => 'email:dns|unique:users',
+            'name' => '',
+            'password' => ''
+        ]);
+        
+        $user = User::find($user->id);
+
+        if (isset($validatedData['name'])) $user->name = $validatedData['name'];
+        if (isset($validatedData['email'])) $user->email = $validatedData['email'];
+        if (isset($validatedData['password'])) $user->password = bcrypt($validatedData['password']);
+        
+        $user->save();
+
+        session()->flash('success', 'Profile updated successfully!');
+        return redirect()->back();
     }
 
     public function leaderboard(User $user)
