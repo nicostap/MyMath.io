@@ -42,6 +42,8 @@ Route::controller(SessionQuestionController::class)->group(function () {
 Route::controller(UserController::class)->group(function () {
     Route::get('/user/leaderboard/{user}', 'leaderboard')
         ->name('user.leaderboard.get');
+    Route::get('/user/leaderboard', 'leaderboardAll')
+        ->name('user.leaderboard.getAll');
 });
 
 Route::resource('history_game', HistoryGameController::class);
