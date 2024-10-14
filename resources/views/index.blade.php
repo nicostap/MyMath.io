@@ -38,6 +38,8 @@
         </div>
     </div>
 
+    <div class="py-10 bg-gray-900 h-full w-full">
+    </div>
 
     <div class="flex flex-col h-full w-full items-center justify-between gap-5 bg-gray-900 text-white py-24 sm:py-32">
         <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 py-20">
@@ -147,11 +149,11 @@
 
     <div class="py-20 bg-gray-900 h-full w-full">
     </div>
-    <div class="py-10 bg-gray-900 h-full w-full">
+    <div class="py-8 bg-gray-900 h-full w-full">
     </div>
 
     <div class="flex flex-col h-full w-full items-center justify-between gap-5 bg-gray-900 text-white isolate px-6 lg:px-8">
-        <div class="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl aria-hidden='true'">
+        <div class="relative inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl aria-hidden='true'">
             <div class="mx-auto aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
                 style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)">
             </div>
@@ -159,9 +161,9 @@
         <div class="mx-auto grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
             <div
                 class="rounded-3xl rounded-t-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 sm:rounded-b-none sm:p-10 lg:mx-0 lg:rounded-bl-3xl lg:rounded-tr-none">
-                <h3 id="tier-hobby" class="text-base font-semibold leading-7 text-indigo-600">Monthly</h3>
+                <h3 id="tier-hobby" class="text-base font-semibold leading-7 text-indigo-600">Gold</h3>
                 <p class="mt-4 flex items-baseline gap-x-2">
-                    <span class="text-5xl font-bold tracking-tight text-gray-900">Rp xxx</span>
+                    <span class="text-5xl font-bold tracking-tight text-gray-900">Only 75K</span>
                     <span class="text-base text-gray-500">/month</span>
                 </p>
                 <p class="mt-6 text-base leading-7 text-gray-600">The perfect plan if you&#039;re just getting started with
@@ -209,9 +211,9 @@
                     started today</a>
             </div>
             <div class="relative rounded-3xl bg-gray-800 p-8 shadow-2xl ring-1 ring-gray-900/10 sm:p-10">
-                <h3 id="tier-enterprise" class="text-base font-semibold leading-7 text-indigo-400">Yearly</h3>
+                <h3 id="tier-enterprise" class="text-base font-semibold leading-7 text-indigo-400">Platinum</h3>
                 <p class="mt-4 flex items-baseline gap-x-2">
-                    <span class="text-5xl font-bold tracking-tight text-white">Rp xxx</span>
+                    <span class="text-5xl font-bold tracking-tight text-white">60K x 12</span>
                     <span class="text-base text-gray-400">/year</span>
                 </p>
                 <p class="mt-6 text-base leading-7 text-gray-300">Dedicated lesson for your mathematic.
