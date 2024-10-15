@@ -22,13 +22,21 @@
                         our game now!</h2>
                     <p class="mt-6 text-lg leading-8 text-gray-300">See how strong your math is. Beat the others and become
                         the legend</p>
+                    @if (Auth::id())
+                    <div class="mt-10 flex items-center justify-start gap-x-6">
+                        <a href="{{ route('game.index', Auth::id()) }}"
+                            class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                            Play Now!</a>
+                    </div>
+                    @else
                     <div class="mt-10 flex items-center justify-start gap-x-6">
                         <a href="{{ route('login') }}"
                             class="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                             Login</a>
                         <a href="{{ route('register') }}" class="text-sm font-semibold leading-6 text-white">Sign Up <span
                                 aria-hidden="true">→</span></a>
-                    </div>
+                    </div>       
+                    @endif
                 </div>
                 <div class="relative mt-16 h-80 lg:mt-8">
                     <img class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
