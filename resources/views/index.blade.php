@@ -40,7 +40,7 @@
                 </div>
                 <div class="relative mt-16 h-80 lg:mt-8">
                     <img class="absolute left-0 top-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
-                        src={{ asset('Math.jpg') }} alt="App screenshot" width="1824" height="1080">
+                        src={{ asset('math.jpg') }} alt="App screenshot" width="1824" height="1080">
                 </div>
             </div>
         </div>
