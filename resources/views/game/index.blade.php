@@ -59,7 +59,8 @@
 
             <!-- Submit Button -->
             <button id="submit-answer"
-                class="block mx-auto mt-6 md:w-1/3 w-full bg-blue-900 hover:bg-blue-500 text-white py-3 px-6 rounded-lg shadow-lg transition duration-200 ease-in-out hover:shadow-xl">
+                class="block mx-auto mt-6 md:w-1/3 w-full bg-blue-900 text-white py-3 px-6 rounded-lg shadow-lg transition duration-200 ease-in-out"
+                disabled>
                 A N S W E R
             </button>
         </div>
@@ -189,6 +190,9 @@
                 } else {
                     $('#question-image').hide();
                 }
+                $('#submit-answer').prop('disabled', false);
+                $('#submit-answer').removeClass();
+                $('#submit-answer').addClass('block mx-auto mt-6 md:w-1/3 w-full bg-blue-900 hover:bg-blue-500 text-white py-3 px-6 rounded-lg shadow-lg transition duration-200 ease-in-out hover:shadow-xl')
                 sessionQuestionId = response.data.session_question.id;
             })
             .catch(error => {
@@ -199,6 +203,9 @@
 
     function submitAnswer() {
         const answer = parseFloat($('#answer').val());
+        $('#submit-answer').prop('disabled', true);
+        $('#submit-answer').removeClass();
+        $('#submit-answer').addClass('block mx-auto mt-6 md:w-1/3 w-full bg-blue-900 text-white py-3 px-6 rounded-lg shadow-lg transition duration-200 ease-in-out')
         if (!isNaN(answer)) {
             axios.post(`/session-questions/${sessionQuestionId}/answer`, { answer })
                 .then((response) => {

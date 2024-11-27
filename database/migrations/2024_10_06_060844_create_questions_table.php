@@ -24,6 +24,7 @@ class CreateQuestionsTable extends Migration
             $table->enum('type', ['MULTIPLE_CHOICES', 'ESSAY']);
             $table->timestamp('created_at')->default(Carbon::now());
             $table->timestamp('updated_at')->default(Carbon::now());
+            $table->string('solution');
         });
     }
 
