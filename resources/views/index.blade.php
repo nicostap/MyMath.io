@@ -23,14 +23,14 @@
                 <div></div>
             </div>
             <div class="text-center mx-auto max-w-screen pb-5 sm:pb-10 lg:pb-16">
-                <div class="sm:mb-8 sm:flex sm:justify-center py-4">
+                <div class="sm:mb-8 sm:flex sm:justify-center pt-4">
                     <div
                         class="relative rounded-full px-3 py-1 text-sm text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                         See how strong your math is. Beat the others and become the legend
                     </div>
                 </div>
                 @if (Auth::id())
-                    <div class="mt-10 flex items-center justify-center gap-x-6">
+                    <div class="mt-5 flex items-center justify-center gap-x-6">
                         <a href="{{ route('game.index', Auth::id()) }}"
                             class="rounded-md bg-quaternary px-3.5 py-2.5 text-sm font-semibold text-secondary shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                             Play Now!</a>

@@ -12,9 +12,8 @@
 </head>
 
 <body>
+    @include('nav.navbar')
     @yield('content')
-    {{-- <div id="app" class="h-screen w-screen flex flex-col items-center bg-primary">
-    </div> --}}
     @vite('resources/js/app.js')
     @yield('scripts')
 </body>
