@@ -6,7 +6,15 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#e5f9e0',
+        secondary: '#a3f7b5',
+        tertiary: '#40c9a2',
+        quaternary: '#2f9c95',
+        quinary: '#664147',
+      }
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

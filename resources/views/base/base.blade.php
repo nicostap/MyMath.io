@@ -12,9 +12,9 @@
 </head>
 
 <body>
-    <div id="app" class="h-screen w-screen flex flex-col items-center">
-        @yield('content')
-    </div>
+    @yield('content')
+    {{-- <div id="app" class="h-screen w-screen flex flex-col items-center bg-primary">
+    </div> --}}
     @vite('resources/js/app.js')
     @yield('scripts')
 </body>
