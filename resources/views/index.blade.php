@@ -18,7 +18,7 @@
                     </h1>
                 </div>
                 <div class="items-center justify-center hidden lg:flex">
-                    <img src="{{ asset('M.png') }}" class="w-2/3 rounded-2xl animate-bounce" />
+                    <img src="{{ asset('M.png') }}" class="w-2/3 rounded-2xl animate-bounce mask mask-image bg-quaternary" />
                 </div>
                 <div></div>
             </div>
