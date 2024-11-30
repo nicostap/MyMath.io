@@ -33,13 +33,13 @@
             @if (Auth::id())
                 <div class="flex items-center justify-center gap-x-6">
                     <a href="{{ route('game.index', Auth::id()) }}"
-                        class="rounded-md bg-quaternary px-3.5 text-sm font-semibold text-secondary shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                        class="rounded-md bg-quaternary px-3.5 py-1 text-sm font-semibold text-secondary shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                         Play Now!</a>
                 </div>
             @else
                 <div class="flex items-center justify-center gap-x-6">
                     <a href="{{ route('login') }}"
-                        class="rounded-md bg-secondary px-3.5 text-sm font-semibold text-quinary shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                        class="rounded-md bg-secondary px-3.5 py-1 text-sm font-semibold text-quinary shadow-sm hover:bg-tertiary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
                         Login</a>
                     <a href="{{ route('register') }}" class="text-sm/6 font-semibold text-quinary">Sign Up <span
                             aria-hidden="true">→</span></a>
