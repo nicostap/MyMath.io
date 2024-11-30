@@ -13,8 +13,8 @@
   
               Menu open: "hidden", Menu closed: "block"
             -->
-                    <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                        aria-hidden="true" data-slot="icon">
+                    <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" aria-hidden="true" data-slot="icon">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
@@ -23,8 +23,8 @@
   
               Menu open: "block", Menu closed: "hidden"
             -->
-                    <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                        aria-hidden="true" data-slot="icon">
+                    <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" aria-hidden="true" data-slot="icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                 </button>
@@ -88,11 +88,13 @@
                             @if (Auth::check() && Auth::user()->id)
                                 <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-quinary"
                                     role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                                <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-quinary" role="menuitem"
-                                    tabindex="-1" id="user-menu-item-2">Sign out</a>
+                                <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-quinary"
+                                    role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
                             @else
-                                <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-quinary" role="menuitem"
-                                    tabindex="-1" id="user-menu-item-2">Login</a>
+                                <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-quinary"
+                                    role="menuitem" tabindex="-1" id="user-menu-item-2">Login</a>
+                                <a href="{{ route('register') }}" class="block px-4 py-2 text-sm text-quinary"
+                                    role="menuitem" tabindex="-1" id="user-menu-item-2">Register</a>
                             @endif
 
                         </div>
@@ -129,14 +131,14 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Mobile Menu Toggle
-        $('#mobile-menu-button').on('click', function () {
+        $('#mobile-menu-button').on('click', function() {
             $('#mobile-menu').toggleClass('hidden');
         });
 
         // User Profile Dropdown Toggle
-        $('#user-menu-button').on('click', function () {
+        $('#user-menu-button').on('click', function() {
             $('#user-menu').toggleClass('hidden');
         });
     });
