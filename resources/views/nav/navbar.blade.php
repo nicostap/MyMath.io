@@ -1,9 +1,9 @@
-<nav class="bg-tertiary">
+<nav class="block top-0 left-0 w-full bg-tertiary z-50">
     <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div class="relative flex h-16 items-center justify-between">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button-->
-                <button type="button"
+                <button type="button" id="mobile-menu-button"
                     class="relative inline-flex items-center justify-center rounded-md p-2 text-quinary hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                     aria-controls="mobile-menu" aria-expanded="false">
                     <span class="absolute -inset-0.5"></span>
@@ -13,8 +13,8 @@
   
               Menu open: "hidden", Menu closed: "block"
             -->
-                    <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" aria-hidden="true" data-slot="icon">
+                    <svg class="block size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                        aria-hidden="true" data-slot="icon">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
@@ -23,8 +23,8 @@
   
               Menu open: "block", Menu closed: "hidden"
             -->
-                    <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" aria-hidden="true" data-slot="icon">
+                    <svg class="hidden size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                        aria-hidden="true" data-slot="icon">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                 </button>
@@ -77,7 +77,7 @@
                 From: "transform opacity-100 scale-100"
                 To: "transform opacity-0 scale-95"
             -->
-                    <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md  py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
+                    <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md  py-1 focus:outline-none"
                         role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                         <!-- Active: "bg-gray-100 outline-none", Not Active: "" -->
                         <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none hidden"
@@ -86,11 +86,11 @@
                             @if (Auth::check() && Auth::user()->id)
                                 <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-quinary"
                                     role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                                <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-quinary"
-                                    role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+                                <a href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-quinary" role="menuitem"
+                                    tabindex="-1" id="user-menu-item-2">Sign out</a>
                             @else
-                                <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-quinary"
-                                    role="menuitem" tabindex="-1" id="user-menu-item-2">Login</a>
+                                <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-quinary" role="menuitem"
+                                    tabindex="-1" id="user-menu-item-2">Login</a>
                             @endif
 
                         </div>
@@ -101,7 +101,7 @@
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div class="sm:hidden" id="mobile-menu">
+    <div class="hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pb-3 pt-2">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="#"
@@ -120,14 +120,14 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Mobile Menu Toggle
-        $('#mobile-menu-button').on('click', function() {
+        $('#mobile-menu-button').on('click', function () {
             $('#mobile-menu').toggleClass('hidden');
         });
 
         // User Profile Dropdown Toggle
-        $('#user-menu-button').on('click', function() {
+        $('#user-menu-button').on('click', function () {
             $('#user-menu').toggleClass('hidden');
         });
     });
