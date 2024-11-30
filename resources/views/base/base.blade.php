@@ -12,8 +12,10 @@
 </head>
 
 <body>
-    @include('nav.navbar')
-    @yield('content')
+    <div class="flex h-screen flex-col">
+        @include('nav.navbar')
+        @yield('content')
+    </div>
     @vite('resources/js/app.js')
     @yield('scripts')
 </body>
