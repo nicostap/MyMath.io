@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="flex h-screen flex-col">
+    <div class="flex h-screen flex-col bg-primary">
         @include('nav.navbar')
         @yield('content')
     </div>

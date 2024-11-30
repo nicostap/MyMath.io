@@ -22,7 +22,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 0,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"Add a by one b times, you will get ${a + 1} ... ${a + b}!"',
+                'solution' => '"Add {a} by one {b} times, you will get ".({a} + 1)." ... ".({a} + {b})."!"',
             ],
             [
                 'question' => 'What is the result of this expression?',
@@ -33,7 +33,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 0,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"Subtract a by one b times, you will get ${a - 1} ... ${a - b}!"',
+                'solution' => '"Subtract {a} by one {b} times, you will get ".({a} - 1)." ... ".({a} - {b})."!"',
             ],
             [
                 'question' => 'What is the result of this expression?',
@@ -44,7 +44,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 50,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"Add a by a b times, you will get a + a + ... = ${a * b}!"',
+                'solution' => '"Add {a} by {a} {b} times, you will get {a} + {a} + ... = ".({a} * {b})."!"',
             ],
             [
                 'question' => 'What is the result of this expression? (Round to nearest number)',
@@ -55,7 +55,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 50,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"Subtract a by b until a becomes 0, keep tracks of the total count!"',
+                'solution' => '"Subtract {a} by {b} until {a} becomes 0, keep tracks of the total count!"',
             ],
             [
                 'question' => 'What is the result of this expression?',
@@ -66,7 +66,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 100,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"Add a by b\'s tens place and then add b\'s ones place"',
+                'solution' => '"Add {a} by {b}\'s tens place and then add {b}\'s ones place"',
             ],
             [
                 'question' => 'What is the result of this expression?',
@@ -77,7 +77,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 100,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"Subtract a by b\'s tens place and then subtract b\'s ones place"',
+                'solution' => '"Subtract {a} by {b}\'s tens place and then subtract {b}\'s ones place"',
             ],
             [
                 'question' => 'What is the result of this expression?',
@@ -88,7 +88,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 150,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"Multiply a by b\'s tens place, multiply a by b\'s ones place, add both of them together"',
+                'solution' => '"Multiply {a} by {b}\'s tens place, multiply {a} by {b}\'s ones place, add both of them together"',
             ],
             [
                 'question' => 'What is the result of this expression?',
@@ -99,7 +99,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 150,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"Multiply a by a two times"',
+                'solution' => '"Multiply {a} by {a} two times"',
             ],
             [
                 'question' => 'What is the result of this expression? (Round to 2 decimals place)',
@@ -110,7 +110,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 200,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"Subtract a by b until a becomes 0, keep tracks of the total count!"',
+                'solution' => '"Subtract {a} by {b} until {a} becomes 0, keep tracks of the total count!"',
             ],
             [
                 'question' => 'What is the value of x?',
@@ -121,7 +121,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 200,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"x + a - a = b - a\nx = b - a"',
+                'solution' => '"x + {a} - {a} = {b} - {a}<br/>x = {b} - {a}"',
             ],
             [
                 'question' => 'What is the value of x?',
@@ -132,18 +132,7 @@ class QuestionSeeder extends Seeder
                 'rating' => 200,
                 'type' => 'ESSAY',
                 'image' => null,
-                'solution' => '"(x - a) ÷ b * b = c * b\nx - a = bc\nx - a + a = bc + a\nx = bc + a"',
-            ],
-            [
-                'question' => 'What is the value of x? (Separate by comma)',
-                'math_question' => '(x - a)(x - b) = 0',
-                'answer_formula' => 'a,b',
-                'coefficients' => 'a,b',
-                'round_to' => 0,
-                'rating' => 200,
-                'type' => 'ESSAY',
-                'image' => null,
-                'solution' => '"if x is a or b, one of the subtraction result will result in zero"',
+                'solution' => '"(x - {a}) ÷ {b} * {b} = {c} * {b}<br/>x - {a} = ".({b} * {c})."<br/>x - {a} + {a} = ".({b} * {c})." + {a}<br/>x = ".({b} * {c})." + {a}"',
             ],
             [
                 'question' => 'What is the value of the side of c? (Round to nearest number)',

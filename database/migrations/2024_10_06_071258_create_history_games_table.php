@@ -13,7 +13,7 @@ class CreateHistoryGamesTable extends Migration
     public function up(): void
     {
         Schema::create('history_games', function (Blueprint $table) {
-            $table->integer('id')->primary();
+            $table->id();
             $table->timestamp('started_at')->nullable();
             $table->timestamp('finished_at')->nullable();
             $table->foreignId('first_player_id')->constrained('users');

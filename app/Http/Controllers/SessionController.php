@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\HistoryGame;
+use App\Models\HistorySessionQuestion;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -13,11 +14,11 @@ class SessionController extends Controller
     public function getGameStatus(Game $game, Session $session)
     {
         $sessions = $game->sessions;
-        foreach ($sessions as $session) {
-            if ($session->player_id == $game->first_player_id) {
-                $first_player_session = $session;
-            } else if ($session->player_id == $game->second_player_id) {
-                $second_player_session = $session;
+        foreach ($sessions as $game_session) {
+            if ($game_session->player_id == $game->first_player_id) {
+                $first_player_session = $game_session;
+            } else if ($game_session->player_id == $game->second_player_id) {
+                $second_player_session = $game_session;
             }
         }
         $first_player_score = $first_player_session->score;
@@ -58,6 +59,15 @@ class SessionController extends Controller
                 'first_player_score' => $first_player_score,
                 'second_player_score' => $second_player_score,
             ], ['id']);
+            $questions = $session->questions;
+            foreach ($questions as $question) {
+                HistorySessionQuestion::upsert([
+                    'history_game_id' => $game->id,
+                    'question_id' => $question->question_id,
+                    'coefficients' => json_encode($question->coefficients),
+                    'user_id' => $session->player_id,
+                ], ['history_game_id', 'question_id', 'user_id']);
+            }
         } else {
             $status = 'Ongoing';
         }

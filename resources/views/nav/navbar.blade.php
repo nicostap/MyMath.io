@@ -4,7 +4,7 @@
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 <!-- Mobile menu button-->
                 <button type="button" id="mobile-menu-button"
-                    class="relative inline-flex items-center justify-center rounded-md p-2 text-quinary hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                    class="relative inline-flex items-center justify-center rounded-md p-2 text-quinary hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                     aria-controls="mobile-menu" aria-expanded="false">
                     <span class="absolute -inset-0.5"></span>
                     <span class="sr-only">Open main menu</span>
@@ -40,7 +40,9 @@
                             class="rounded-md bg-tertiary px-3 hover:bg-primary py-2 text-sm font-medium text-quinary">Home</a>
                         @if (Auth::check() && Auth::user()->id)
                             <a href="{{ route('user.leaderboard.get', Auth::user()->id) }}"
-                                class="rounded-md px-3 py-2 text-sm font-medium text-quinary hover:bg-primary hover:text-white">Leaderboard</a>
+                                class="rounded-md px-3 py-2 text-sm font-medium text-quinary hover:bg-primary">Leaderboard</a>
+                            <a href="{{ route('history', Auth::user()->id) }}"
+                                class="rounded-md px-3 py-2 text-sm font-medium text-quinary hover:bg-primary">History</a>
                         @else
                             <a href="{{ route('user.leaderboard.getAll') }}"
                                 class="rounded-md px-3 py-2 text-sm font-medium text-quinary hover:bg-primary hover:text-quinary">Leaderboard</a>
@@ -106,8 +108,15 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="#"
                 class="block rounded-md bg-tertiary px-3 py-2 text-base hover:bg-primary font-medium text-quinary">Home</a>
-            <a href="#"
-                class="block rounded-md px-3 py-2 text-base font-medium text-quinary hover:bg-primary hover:text-quinary">Leaderboard</a>
+            @if (Auth::check() && Auth::user()->id)
+                <a href="{{ route('user.leaderboard.get', Auth::user()->id) }}"
+                    class="block rounded-md px-3 py-2 text-base font-medium text-quinary hover:bg-primary hover:text-quinary">Leaderboard</a>
+                <a href="{{ route('history', Auth::user()->id) }}"
+                    class="block rounded-md px-3 py-2 text-base font-medium text-quinary hover:bg-primary hover:text-quinary">History</a>
+            @else
+                <a href="{{ route('user.leaderboard.getAll') }}"
+                    class="block rounded-md px-3 py-2 text-base font-medium text-quinary hover:bg-primary hover:text-quinary">Leaderboard</a>
+            @endif
             <a href="#"
                 class="block rounded-md px-3 py-2 text-base font-medium text-quinary hover:bg-primary hover:text-quinary">Event</a>
             <a href="#"

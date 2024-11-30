@@ -46,4 +46,9 @@ class HistoryGame extends Model
     {
         return $this->belongsTo(User::class, 'winner_id');
     }
+
+    public function sessions()
+    {
+        return $this->hasMany(HistorySessionQuestion::class, 'history_game_id');
+    }
 }

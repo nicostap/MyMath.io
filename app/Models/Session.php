@@ -30,6 +30,11 @@ class Session extends Model
         'finished_at',
     ];
 
+    public function questions()
+    {
+        return $this->hasMany(SessionQuestion::class, 'session_id');
+    }
+
     public function player()
     {
         return $this->belongsTo(User::class, 'player_id');

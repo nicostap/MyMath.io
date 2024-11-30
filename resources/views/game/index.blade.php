@@ -15,7 +15,7 @@
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
             </path>
         </svg>
-        <h1 id="status" class="animate-bounce font-bold text-center text-xl">Looking for a match...</h1>
+        <h1 id="status" class="animate-bounce font-bold text-center text-xl mt-5">Looking for a match...</h1>
     </div>
 
     <div id="game" class="relative z-10 flex flex-col h-screen w-full items-center justify-center">
@@ -225,7 +225,11 @@
                     $('#finish').fadeIn();
 
                     // Update the scores and winner in the finish section
-                    $('#final-first-player-score').text(response.data.first_player_score);
+                    if (firstOrSecond === 'first') {
+                        $('#final-first-player-score').text(response.data.first_player_score);
+                    } else {
+                        $('#final-first-player-score').text(response.data.second_player_score);
+                    }
                     $('#winner').text(response.data.winner ? `${response.data.winner.name} wins!` : "It's a Draw!");
                 } else {
                     $('#status').text('Fight');

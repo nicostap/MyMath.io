@@ -26,13 +26,13 @@ Route::get('/', function () {
 Route::controller(UserController::class)->group(function () {
     Route::get('/login', 'index')->name('login');
     Route::post('/login', 'authenticate');
-    
+
     Route::get('/register', 'registerView')->name('register');
     Route::post('/register', 'register');
-    
+
     Route::get('/profile', 'profile')->name('profile');
     Route::post('/profile', 'updateProfile')->name('update-profile');
-    
+
     Route::get('/logout', 'logout')->name('logout');
 });
 
@@ -41,6 +41,9 @@ Route::controller(GameController::class)->group(function () {
     Route::post('/game/connect/{user}', 'connect')->name('game.connect');
     Route::post('/game/{game}/start/{user}', 'start')->name('game.start');
 });
+
+Route::get('/history/{user}', [HistoryGameController::class, 'index'])->name('history');
+Route::get('/history_game', [HistoryGameController::class, 'getUserHistoryGames']);
 
 Route::get('/game/{game}/session/{session}/status', [SessionController::class, 'getGameStatus'])
     ->name('game.session.status');
@@ -58,5 +61,3 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/user/leaderboard', 'leaderboardAll')
         ->name('user.leaderboard.getAll');
 });
-
-Route::resource('history_game', HistoryGameController::class);

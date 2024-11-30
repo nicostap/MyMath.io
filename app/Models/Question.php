@@ -18,6 +18,7 @@ class Question extends Model
         'round_to',
         'rating',
         'type',
+        'solution',
     ];
 
     protected $casts = [
